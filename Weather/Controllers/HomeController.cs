@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Weather.Services;
 using Weather.ViewModels;
 
 namespace Weather.Controllers
@@ -15,32 +16,18 @@ namespace Weather.Controllers
         // GET: /Home/
         public async Task<ActionResult> Index()
         {
-            //http://api.worldweatheronline.com/free/v1/weather.ashx?q=RG248AG&format=json&num_of_days=5&key=t77bzy6gfxxzyxvq4pu6qqea
-
             HomeViewModel viewModel = new HomeViewModel();
 
-            using (HttpClient client = new HttpClient())
+            var weatherService = new WeatherService();
+            var currentConditions = await weatherService.GetWeather();
+
+            if(currentConditions!=null)
             {
-                client.BaseAddress = new Uri("http://api.worldweatheronline.com/free/v1/weather.ashx");
-                var response = await client.GetAsync("http://api.worldweatheronline.com/free/v1/weather.ashx?q=RG248AG&format=json&num_of_days=5&key=t77bzy6gfxxzyxvq4pu6qqea");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var data = await response.Content.ReadAsAsync<Weather.Models.WeatherData.Rootobject>();
-
-                    if (data != null && data.data != null) //make sure we have some data
-                    {
-                        var currentConditions = data.data.current_condition.FirstOrDefault();
-
-                        if (currentConditions != null)//make sure we have current conditions
-                        {
-                            viewModel.Conditions = currentConditions.weatherDesc[0].value;
-                            viewModel.CurrentTemperature = currentConditions.temp_C;
-                            viewModel.WeatherImage = currentConditions.weatherIconUrl[0].value;
-                        }
-                    }
-                }
+                viewModel.Conditions = currentConditions.weatherDesc[0].value;
+                viewModel.CurrentTemperature = currentConditions.temp_C;
+                viewModel.WeatherImage = currentConditions.weatherIconUrl[0].value;
             }
+
             return View(viewModel);
         }
 	}
