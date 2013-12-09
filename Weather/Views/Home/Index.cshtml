@@ -1,10 +1,16 @@
-﻿
+﻿@model Weather.ViewModels.HomeViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<p>
-    Current Weather at Original Software 
-</p>
 
+<div class="row">
+    <div class="col-lg-3">
+        <img src="@Model.WeatherImage" />
+    </div>
+    <div class="col-lg-3">
+        Conditions: @Model.Conditions
+        Temp: @Model.CurrentTemperature<text>&deg;C</text>
+    </div>
+</div>
