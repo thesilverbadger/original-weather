@@ -11,14 +11,36 @@ namespace Weather.Services
 {
     public class WeatherService
     {
-        public async Task<WeatherData.Current_Condition> GetWeather()
+        internal async Task<WeatherData.Current_Condition> GetWeatherForConfiguredPostcode()
+        {
+            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}", 
+                ConfigurationManager.AppSettings["postcode"], ConfigurationManager.AppSettings["apikey"]);
+
+            return await GetWeather(url);
+        }
+
+        internal async Task<WeatherData.Current_Condition> GetWeatherForLatLong(string latitude, string longitude)
+        {
+            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}%2C{1}&format=json&num_of_days=5&key={2}", 
+                latitude, longitude, ConfigurationManager.AppSettings["apikey"]);
+
+            return await GetWeather(url);
+        }
+
+        internal async Task<WeatherData.Current_Condition> GetWeatherForPostcode(string postcode)
+        {
+            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}", 
+                postcode, ConfigurationManager.AppSettings["apikey"]);
+
+            return await GetWeather(url);
+        }
+
+        private static async Task<WeatherData.Current_Condition> GetWeather(string url)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://api.worldweatheronline.com/free/v1/weather.ashx");
 
-                string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}", ConfigurationManager.AppSettings["postcode"], ConfigurationManager.AppSettings["apikey"]);
-                
                 var response = await client.GetAsync(url);
 
                 response.EnsureSuccessStatusCode();
@@ -33,5 +55,7 @@ namespace Weather.Services
                 return null;
             }
         }
+
+
     }
 }

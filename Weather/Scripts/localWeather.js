@@ -23,10 +23,15 @@ function getLocation() {
 }
 
 function showPosition(position) {
+
     console.log("got position");
+
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     $("#localWeather").show();
+
+    //todo: call api and pass lat&long
+
     console.log("lat: " + latitude);
     console.log("log: " + longitude);
 }

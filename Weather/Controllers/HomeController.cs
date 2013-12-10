@@ -19,7 +19,7 @@ namespace Weather.Controllers
             HomeViewModel viewModel = new HomeViewModel();
 
             var weatherService = new WeatherService();
-            var currentConditions = await weatherService.GetWeather();
+            var currentConditions = await weatherService.GetWeatherForConfiguredPostcode();
 
             if(currentConditions!=null)
             {
