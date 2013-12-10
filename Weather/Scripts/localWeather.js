@@ -1,5 +1,4 @@
 ﻿/// <reference path="jquery-1.10.2.intellisense.js" />
-console.log("loaded");
 
 var weatherLookupError = $("#weatherLookupError");
 
@@ -13,7 +12,7 @@ function getLocation() {
 
     if (navigator.geolocation) {
         console.log("browser supports geolocation");
-        navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+        navigator.geolocation.getCurrentPosition(getWeatherForLatLong, showError, options);
     }
     else {
         console.log("browser does not support geolocation");
@@ -22,7 +21,7 @@ function getLocation() {
     }
 }
 
-function showPosition(position) {
+function getWeatherForLatLong(position) {
 
     console.log("got position");
 
@@ -34,6 +33,10 @@ function showPosition(position) {
 
     console.log("lat: " + latitude);
     console.log("log: " + longitude);
+}
+
+function getWeatherForPostcode() {
+    //todo: call api and pass postcode
 }
 
 function showError(error) {

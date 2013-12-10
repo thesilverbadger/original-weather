@@ -26,23 +26,37 @@
         <p id="weatherLookupError" style="display:none;" class="alert alert-warning"></p>
         <div id="postcodeLookup" style="display:none;">
             <p>Lookup using your postcode</p>
-            <input type="text" placeholder="Postcode" />
-            <button type="button">Lookup</button>
+            <input type="text" placeholder="Postcode" id="postcode" />
+            <button type="button" id="search">Lookup</button>
         </div>
 
         <div class="row" id="localWeather" style="display:none;">
             <div class="col-lg-3">
-                <img src="" alt="localWeatherImage" />
+                <img src="" alt="localWeatherImage" id="localImage" />
             </div>
             <div class="col-lg-3">
                 <p>
-                    Conditions:
+                    Conditions: <span id="localConditions"></span>
                 </p>
                 <p>
-                    Temp: <text>&deg;C</text>
+                    Temp: <span id="localTemp"></span>&deg;C
                 </p>
             </div>
         </div>
 
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+
+            var options = new Object();
+            options.latLongApiUrl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "LatLong" })';
+            options.postcodeApiUrl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "Postcode" })';
+
+            var weather = new weatherApi(options);
+        });
+    </script>    
+}
