@@ -48,6 +48,8 @@ function showError(error) {
             weatherLookupError.html("An unknown error occurred.");
             break;
     }
+
+    $("#postcodeLookup").show();
 }
 
 getLocation();
