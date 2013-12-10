@@ -12,7 +12,6 @@ function getLocation() {
     }
     else {
         console.log("browser does not support geolocation");
-        alert("Geolocation is not supported by this browser.");
         weatherLookupError.show();
         weatherLookupError.html("Geolocation is not supported by this browser.");
     }
@@ -30,7 +29,6 @@ function showPosition(position) {
 function showError(error) {
 
     weatherLookupError.show();
-    alert("Error");
     console.log(error.code);
 
     switch (error.code) {
