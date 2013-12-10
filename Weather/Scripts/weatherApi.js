@@ -68,7 +68,6 @@
         },
 
         showCurrentCondition: function (data) {
-            //debugger;
             var temp = data.temp_C;
             var conditions = data.weatherDesc[0].value;
             var icon = data.weatherIconUrl[0].value;
@@ -101,24 +100,16 @@
 
         getWeatherForLatLong: function (position) {
 
-            console.log("got position");
-
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-            $("#localWeather").show();
 
             server.getByLatLong(latitude, longitude).done(_weatherApi.showCurrentCondition);
-
-            console.log("lat: " + latitude);
-            console.log("log: " + longitude);
         },
 
         showError: function (error) {
 
             var weatherLookupError = $("#weatherLookupError");
             weatherLookupError.show();
-            console.log("error getting position");
-            console.log(error.code);
 
             switch (error.code) {
                 case error.PERMISSION_DENIED:
