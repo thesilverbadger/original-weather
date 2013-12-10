@@ -5,10 +5,15 @@ var weatherLookupError = $("#weatherLookupError");
 
 function getLocation() {
     console.log("getLocation");
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
 
     if (navigator.geolocation) {
         console.log("browser supports geolocation");
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(showPosition, showError, options);
     }
     else {
         console.log("browser does not support geolocation");
@@ -18,7 +23,7 @@ function getLocation() {
 }
 
 function showPosition(position) {
-
+    console.log("got position");
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     $("#localWeather").show();
@@ -29,6 +34,7 @@ function showPosition(position) {
 function showError(error) {
 
     weatherLookupError.show();
+    console.log("error getting position");
     console.log(error.code);
 
     switch (error.code) {
