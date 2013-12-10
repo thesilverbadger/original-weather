@@ -107,7 +107,7 @@
             var longitude = position.coords.longitude;
             $("#localWeather").show();
 
-            _server.getByLatLong(latitude, longitude).done(_weatherApi.showCurrentCondition);
+            server.getByLatLong(latitude, longitude).done(_weatherApi.showCurrentCondition);
 
             console.log("lat: " + latitude);
             console.log("log: " + longitude);
