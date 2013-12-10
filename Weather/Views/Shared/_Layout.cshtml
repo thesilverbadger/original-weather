@@ -18,23 +18,10 @@
         <div class="masthead">
             <h3 class="text-muted">Weather</h3>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h4>Current Weather at Original Software</h4>
-                @RenderBody()
-            </div>
-            <div class="col-lg-6">
-                <h4>Local Weather where you are</h4>
-                <p id="postcodeLookupError" style="display:none;" class="alert alert-warning"></p>
-                <div id="postcodeLookup" style="display:none;">
-                    <p>Lookup using your postcode</p>
-                    <input type="text" placeholder="Postcode" />
-                    <button type="button">Lookup</button>
-                </div>
-            </div>
-        </div>
 
-        
+        @RenderBody()
+
+
         <!-- Site footer -->
         <div class=" footer">
             <p>&copy; Tom Wire @DateTime.Now.Year</p>

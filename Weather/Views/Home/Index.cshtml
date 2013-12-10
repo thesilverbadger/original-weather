@@ -4,13 +4,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row">
-    <div class="col-lg-3">
-        <img src="@Model.WeatherImage" />
+    <div class="col-lg-6">
+        <h4>Current Weather at Original Software</h4>
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="@Model.WeatherImage" alt="originalWeatherImage" />
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    Conditions: @Model.Conditions
+                </p>
+                <p>
+                    Temp: @Model.CurrentTemperature<text>&deg;C</text>
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="col-lg-3">
-        Conditions: @Model.Conditions
-        Temp: @Model.CurrentTemperature<text>&deg;C</text>
+    <div class="col-lg-6">
+        <h4>Local Weather where you are</h4>
+        <p id="weatherLookupError" style="display:none;" class="alert alert-warning"></p>
+        <div id="postcodeLookup" style="display:none;">
+            <p>Lookup using your postcode</p>
+            <input type="text" placeholder="Postcode" />
+            <button type="button">Lookup</button>
+        </div>
+
+        <div class="row" id="localWeather" style="display:none;">
+            <div class="col-lg-3">
+                <img src="" alt="localWeatherImage" />
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    Conditions:
+                </p>
+                <p>
+                    Temp: <text>&deg;C</text>
+                </p>
+            </div>
+        </div>
+
     </div>
 </div>
