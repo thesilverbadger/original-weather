@@ -57,6 +57,7 @@
             options.postcodeApiUrl = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "Postcode" })';
 
             var weather = new weatherApi(options);
+            weather.getLocation();
         });
     </script>    
 }
