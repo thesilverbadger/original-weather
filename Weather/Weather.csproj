@@ -93,6 +93,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Stylesheets\justified-nav.css" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\originalweather - FTP.pubxml" />

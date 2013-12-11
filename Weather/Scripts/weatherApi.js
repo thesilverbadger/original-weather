@@ -58,6 +58,7 @@
             var postcode = $('#postcode').val();
             $('#postcodeLookup').hide();
             $('#weatherLookupError').hide();
+            $("#loading").show();
 
             server.getByPostcode(postcode).done(_weatherApi.showCurrentCondition);
         },
@@ -68,6 +69,8 @@
         },
 
         showCurrentCondition: function (data) {
+
+            $("#loading").hide();
 
             if (!data) {
                 $("#weatherLookupError").html("Error looking up postcode. Did you type it correctly?");
@@ -87,7 +90,7 @@
         },
 
         getLocation: function () {
-            console.log("getLocation");
+            $("#loading").show();
             var options = {
                 enableHighAccuracy: true,
                 timeout: 5000,
@@ -95,11 +98,9 @@
             };
 
             if (navigator.geolocation) {
-                console.log("browser supports geolocation");
                 navigator.geolocation.getCurrentPosition(_weatherApi.getWeatherForLatLong, _weatherApi.showError, options);
             }
             else {
-                console.log("browser does not support geolocation");
                 var weatherLookupError = $("#weatherLookupError");
                 weatherLookupError.show();
                 weatherLookupError.html("Geolocation is not supported by this browser.");
@@ -115,7 +116,7 @@
         },
 
         showError: function (error) {
-
+            $("#loading").hide();
             var weatherLookupError = $("#weatherLookupError");
             weatherLookupError.show();
 
