@@ -47,7 +47,7 @@ namespace Weather.Services
 
                 var data = await response.Content.ReadAsAsync<Weather.Models.WeatherData.Rootobject>();
 
-                if (data != null && data.data != null && data.data.current_condition.Count() > 0) //make sure we have some data
+                if (data != null && data.data != null && data.data.current_condition != null && data.data.current_condition.Count() > 0) //make sure we have some data
                 {
                     return data.data.current_condition.FirstOrDefault();
                 }

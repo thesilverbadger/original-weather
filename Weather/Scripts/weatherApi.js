@@ -68,6 +68,14 @@
         },
 
         showCurrentCondition: function (data) {
+
+            if (!data) {
+                $("#weatherLookupError").html("Error looking up postcode. Did you type it correctly?");
+                $('#weatherLookupError').show();
+                $('#postcodeLookup').show();
+                return;
+            }
+
             var temp = data.temp_C;
             var conditions = data.weatherDesc[0].value;
             var icon = data.weatherIconUrl[0].value;
