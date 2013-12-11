@@ -13,21 +13,34 @@
             </div>
             <div class="col-lg-3">
                 <p>
-                    Conditions: @Model.Conditions
+                    <h4>@Model.CurrentTemperature<text>&deg;C</text></h4>
                 </p>
                 <p>
-                    Temp: @Model.CurrentTemperature<text>&deg;C</text>
+                    @Model.Conditions
                 </p>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
         <h4>Local Weather where you are</h4>
-        <p id="weatherLookupError" style="display:none;" class="alert alert-warning"></p>
+        <div class="row">
+            <div class="col-lg-6 col-md-4 col-sm-4">
+                <p id="weatherLookupError" style="display:none;" class="alert alert-warning"></p>
+            </div>
+        </div>
         <div id="postcodeLookup" style="display:none;">
             <p>Lookup using your postcode</p>
-            <input type="text" placeholder="Postcode" id="postcode" class="form-control" />
-            <button type="button" class="btn btn-default" id="search">Lookup</button>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-4 col-sm-4">
+                    <input type="text" placeholder="Postcode" id="postcode" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-4 col-sm-4">
+                    <button type="button" class="btn btn-default" id="search">Lookup</button>
+                </div>
+            </div>
         </div>
 
         <div class="row" id="localWeather" style="display:none;">
@@ -36,10 +49,10 @@
             </div>
             <div class="col-lg-3">
                 <p>
-                    Conditions: <span id="localConditions"></span>
+                    <h4><span id="localTemp"></span>&deg;C</h4>
                 </p>
                 <p>
-                    Temp: <span id="localTemp"></span>&deg;C
+                    <span id="localConditions"></span>
                 </p>
             </div>
         </div>
