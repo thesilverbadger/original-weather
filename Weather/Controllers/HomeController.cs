@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Weather.Models;
 using Weather.Services;
 using Weather.ViewModels;
 
@@ -18,14 +19,20 @@ namespace Weather.Controllers
         {
             HomeViewModel viewModel = new HomeViewModel();
 
-            var weatherService = new WeatherService();
-            var currentConditions = await weatherService.GetWeatherForConfiguredPostcode();
+            WeatherData.Current_Condition condition = ApplicationCache.Get<WeatherData.Current_Condition>("currentConditions");
 
-            if(currentConditions!=null)
+            if (condition == null)
             {
-                viewModel.Conditions = currentConditions.weatherDesc[0].value;
-                viewModel.CurrentTemperature = currentConditions.temp_C;
-                viewModel.WeatherImage = currentConditions.weatherIconUrl[0].value;
+                var weatherService = new WeatherService();
+                condition = await weatherService.GetWeatherForConfiguredPostcode();
+                ApplicationCache.Set("currentConditions", condition);
+            }
+
+            if (condition != null)
+            {
+                viewModel.Conditions = condition.weatherDesc[0].value;
+                viewModel.CurrentTemperature = condition.temp_C;
+                viewModel.WeatherImage = condition.weatherIconUrl[0].value;
             }
 
             return View(viewModel);
