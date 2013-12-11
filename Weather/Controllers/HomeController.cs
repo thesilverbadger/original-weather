@@ -23,9 +23,16 @@ namespace Weather.Controllers
 
             if (condition == null)
             {
-                var weatherService = new WeatherService();
-                condition = await weatherService.GetWeatherForConfiguredPostcode();
-                ApplicationCache.Set("currentConditions", condition);
+                try
+                {
+                    var weatherService = new WeatherService();
+                    condition = await weatherService.GetWeatherForConfiguredPostcode();
+                    ApplicationCache.Set("currentConditions", condition);
+                }
+                catch (Exception)
+                { 
+                    //catch and ideally log...
+                }
             }
 
             if (condition != null)
@@ -33,6 +40,10 @@ namespace Weather.Controllers
                 viewModel.Conditions = condition.weatherDesc[0].value;
                 viewModel.CurrentTemperature = condition.temp_C;
                 viewModel.WeatherImage = condition.weatherIconUrl[0].value;
+            }
+            else
+            {
+                viewModel.Error = "Error getting current weather conditions. Please try again later";
             }
 
             return View(viewModel);

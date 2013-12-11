@@ -12,5 +12,7 @@ namespace Weather.ViewModels
         public string Conditions { get; set; }
 
         public string WeatherImage { get; set; }
+
+        public string Error { get; set; }
     }
 }
