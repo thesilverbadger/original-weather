@@ -14,23 +14,23 @@ namespace Weather.Services
         internal async Task<WeatherData.Current_Condition> GetWeatherForConfiguredPostcode()
         {
             string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}", 
-                ConfigurationManager.AppSettings["postcode"], ConfigurationManager.AppSettings["apikey"]);
+                Settings.Postcode, Settings.Apikey);
 
             return await GetWeather(url);
         }
 
         internal async Task<WeatherData.Current_Condition> GetWeatherForLatLong(string latitude, string longitude)
         {
-            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}%2C{1}&format=json&num_of_days=5&key={2}", 
-                latitude, longitude, ConfigurationManager.AppSettings["apikey"]);
+            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}%2C{1}&format=json&num_of_days=5&key={2}",
+                latitude, longitude, Settings.Apikey);
 
             return await GetWeather(url);
         }
 
         internal async Task<WeatherData.Current_Condition> GetWeatherForPostcode(string postcode)
         {
-            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}", 
-                postcode, ConfigurationManager.AppSettings["apikey"]);
+            string url = string.Format("http://api.worldweatheronline.com/free/v1/weather.ashx?q={0}&format=json&num_of_days=5&key={1}",
+                postcode, Settings.Apikey);
 
             return await GetWeather(url);
         }
